@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- banner -->
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="/">Anasayfa</a> / Kayıt Ol</span>
+        <h2>Kayıt Ol</h2>
+    </div>
+</div>
+<!-- banner -->
+
+
+<div class="container">
+    <div class="spacer">
+        <form method="post" class="row register" enctype="multipart/form-data">
+            <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
+
+                @*<textarea rows="6" class="form-control" placeholder="Address" name="form_message"></textarea>*@
+
+                
+
+                <div class="form-group">
+                  <label for="Name" class="form-control-label">İsim</label>
+                  <input type="text"  class="form-control" required placeholder="İsminizi Giriniz" name="Name">
+                </div>
+                <div class="form-group">
+                  <label for="Surname" class="form-control-label">Soyisminizi Giriniz</label>
+                  <input type="text" class="form-control" required placeholder="Soyisminizi Giriniz" name="Surname">
+                </div>
+                <div class="form-group">
+                  <label for="Age" class="form-control-label">Eposta</label>
+                  <input type="email" class="form-control" required placeholder="Epostanızı Giriniz" name="Email">
+                </div>
+                <div class="form-group">
+                  <label for="Email" class="form-control-label">Telefon</label>
+                  <input type="tel" class="form-control" placeholder="Telefon numaranızı giriniz" name="PhoneNumber">
+                </div>
+                <div class="form-group">
+                  <label for="PhoneNumber" class="form-control-label">Doğum tarihi </label>
+                  <input type="date" class="form-control" name="BirthDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="file-input" class="form-control-label">Profil resmi</label>
+                    <input type="file" class="form-control" placeholder="Enter Your Profile Photo" name="ProfilePhoto">
+                </div>
+
+                <div class="form-group">
+                    <label for="file-input" class="form-control-label">Kullanıcı Adı</label>
+                    <input type="text" class="form-control" placeholder="Kullanıcı adı giriniz" name="Username">
+                </div>
+
+                <div class="form-group">
+                    <label for="file-input" class="form-control-label">Şifre</label>
+                    <input type="password" class="form-control" required placeholder="Sifrenizi Giriniz" name="Password">
+
+                </div>
+                <div class="form-group">
+                    <label for="file-input" class="form-control-label">Şifre Tekrar</label>
+                    <input type="password" class="form-control" required placeholder="Şifrenizi Tekrar Giriniz" >
+                </div>
+               
+
+                <button type="submit" class="btn btn-success" name="Submit">Kayıt Ol</button>
+
+
+
+
+            </div>
+
+        </form>
+    </div>
+</div>
+

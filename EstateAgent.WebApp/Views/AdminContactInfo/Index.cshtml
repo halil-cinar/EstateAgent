@@ -1,0 +1,60 @@
+﻿@model ContactInfoListDto
+@{
+    ViewData["Title"] = "İletişim Bilgileri";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <aside class="profile-nav alt">
+            <section class="card">
+
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="mailto:@Model.Email"> <i class="fa fa-envelope-o"></i> Mail  <span class=" pull-right">@Model.Email</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-tasks"></i> İsim <span class="pull-right">@Model.Name</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-bell-o"></i> Telefon <span class=" pull-right">@Model.Phone</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-comments-o"></i> Adres <span class="pull-right r-activity">@Model.Address</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-comments-o"></i> X <span class="pull-right r-activity">@Model.XUrl</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-comments-o"></i> Instagram <span class="pull-right r-activity">@Model.InstagramUrl</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-comments-o"></i> Facebook <span class="pull-right r-activity">@Model.FacebookUrl</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-comments-o"></i> Linkedin <span class="pull-right r-activity">@Model.LinkedinUrl</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-comments-o"></i> Longitude <span class="pull-right r-activity">@Model.LocationLongitude</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <i class="fa fa-comments-o"></i> Latitude <span class="pull-right r-activity">@Model.LocationLatitude</span></a>
+                    </li>
+
+
+                </ul>
+                <div class="card-footer">
+
+                    @if (ViewBag.CanUpdate)
+                    {
+                        <a href="/Admin/ContactInfo/Update/@Model.Id" class="btn btn-warning">Güncelle</a>
+                    }
+                </div>
+            </section>
+        </aside>
+    </div>
+</div>
+
+

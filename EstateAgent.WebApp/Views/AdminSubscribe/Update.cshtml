@@ -1,0 +1,19 @@
+﻿@model SubscribeListDto
+@{
+    ViewData["Title"] = "Abone Güncelleme";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<form class="col-lg-6" method="post" >
+    <div class="card">
+        <div class="card-header"><strong>Abone Güncelleme</strong><small> </small></div>
+        <div class="card-body card-block">
+            <input type="hidden" name="Id" value="@Model.Id"/>
+            <div class="form-group"><label for="Email" class=" form-control-label">E Posta</label><input required value="@Model.Email" type="email" id="Email" name="Email" placeholder="Eposta Giriniz" class="form-control"></div>
+
+            <button type="submit" class="btn btn-outline-success ">Güncelle</button>
+
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,24 @@
+﻿@model GenericLoadMoreDto<AboutListDto>
+@{
+    ViewData["Title"] = "Hakkında Güncelleme";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<form class="col-lg-6" method="post">
+    <div class="card">
+        <input type="hidden" name="Id" value="@Model.Values?[0]?.Id"
+        <div class="card-header"><strong>Hakkımızda Güncelleme Formu</strong><small> </small></div>
+        <div class="card-body card-block">
+            <div class="form-group"><label for="Title" class=" form-control-label">Başlık</label>
+                <input type="text" id="Title" required name="Title" placeholder="Başlık Giriniz" value="@((Model?.Values?.Count>0)?Model?.Values?[0].Title:"")" class="form-control">
+            </div>
+
+            <div class="form-group"><label for="Email" class=" form-control-label">İçerik</label>
+                <textarea name="Content" required id="textarea-input" rows="9" placeholder="İçerik Giriniz..." class="form-control">@((Model?.Values?.Count > 0) ? Model.Values?[0].Content : "")</textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-outline-success ">Gönder</button>
+
+        </div>
+    </div>
+</form>

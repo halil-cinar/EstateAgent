@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Çalişan hesabı kullanıcı güncellemesi";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Inline</strong> Form
+            </div>
+            <div class="card-body card-block">
+                <form method="post" class="form-inline">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="select" class=" form-control-label">Çalişan için kullanıcı seçin</label></div>
+                        <div class="col-12 col-md-9">
+                            <select required name="UserId" id="select" class="form-control">
+                                <option value="0">Lütfen Seçiniz</option>
+                                @if (ViewBag?.UserOptionList?.Count > 0)
+                                {
+                                    @for (int i = 0; i < ViewBag?.UserOptionList?.Count; i++)
+                                    {
+                                        var item = ViewBag?.UserOptionList[i];
+                                        <option value="@item?.Value">@item?.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success ">Gönder</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

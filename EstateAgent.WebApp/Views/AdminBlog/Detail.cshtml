@@ -1,0 +1,49 @@
+﻿@model BlogListDto
+@{
+    ViewData["Title"] = $"{Model.Title}";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="card">
+            <img class="card-img-top" src="/Media/@Model.MediaId" alt="Blog image ">
+            <div class="card-body">
+                <h5 class="card-title mb-3">@Model.Title</h5>
+                <p class="card-subtitle">@Model.Description</p>
+                <br/>
+                <p class="card-text">@Model.Content</p>
+            </div>
+            <div class="card-footer">
+                 
+                @if (ViewBag.CanDelete)
+                {
+                    <a href="/Admin/Blog/Delete/@Model.Id" class="btn btn-danger">Sil</a>
+                }
+                @if (ViewBag.CanUpdate)
+                {
+                    <a href="/Admin/Blog/Update/@Model.Id" class="btn btn-warning">Güncelle</a>
+                    <a href="/Admin/Blog/ChangePhoto/@Model.Id" class="btn btn-success">Fotorafı değiştir</a>
+                    <a href="/Admin/Blog/ChangeUser/@Model.Id" class="btn btn-secondary">Kullanıcıyı değiştir</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-user"></i><strong class="card-title pl-2">Profil</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block">
+                    <img class="rounded-circle mx-auto d-block" src="/Media/@Model.UserProfilePhotoId" alt="Card image cap">
+                    <h5 class="text-sm-center mt-2 mb-1">@Model.UserName @Model.UserSurname</h5>
+
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+

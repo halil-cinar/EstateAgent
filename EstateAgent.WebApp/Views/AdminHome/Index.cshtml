@@ -1,0 +1,99 @@
+﻿@model HomeListDto
+@{
+    ViewData["Title"] = "Yönetim Paneli";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<!-- Animated -->
+<div class="animated fadeIn">
+    <!-- Widgets pe-7s-cash -->
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-1">
+                            <i class="pe-7s-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">@Model.AgentCount</span></div>
+                                <div class="stat-heading">Çalişanlar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-2">
+                            <i class="pe-7s-home"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">@Model.SalePropertyCount</span></div>
+                                <div class="stat-heading">Satılık Mülkler</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-3">
+                            <i class="pe-7s-home"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">@Model.RentPropertyCount</span></div>
+                                <div class="stat-heading">Kiralık Mülkler</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="ti-quote-left"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">@Model.BlogCount</span></div>
+                                <div class="stat-heading">Blog Sayısı</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Widgets -->
+    
+    <div class="clearfix"></div>
+
+    
+    <!-- Calender Chart Weather  -->
+    <div class="row">
+        
+        </div>
+
+       
+       
+    </div>
+    <!-- /Calender Chart Weather -->
+
+</div>
+<!-- .animated -->

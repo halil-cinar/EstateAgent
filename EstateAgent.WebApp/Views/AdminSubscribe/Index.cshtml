@@ -1,0 +1,87 @@
+﻿@model GenericLoadMoreDto<SubscribeListDto>
+@{
+    ViewData["Title"] = "Abone Listeleme";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Aboneler</strong>
+            </div>
+            <div class="table-stats order-table ov-h">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th class="serial">#</th>
+                            <th>Eposta</th>
+                            <th>Abone Tarihi</th>
+
+                            <th>Aksiyonlar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model?.Values?.Count > 0)
+                        {
+                            for (int i = 0; i < Model.Values.Count; i++)
+                            {
+                                var item = Model.Values[i];
+                                <tr>
+                                    <td class="serial">@(i + 1).</td>
+
+                                    <td style="text-transform:none">  <span class="">@item.Email</span> </td>
+                                    <td> <span class="">@item.SubscribedDate.ToShortDateString()</span> </td>
+                                    <td>
+                                        @if (ViewBag.CanUpdate)
+                                        {
+                                            <a href="/Admin/Subscribe/Update/@item.Id" class="btn btn-warning">Güncelle</a>
+                                        }
+                                        @if (ViewBag.CanDelete)
+                                        {
+                                            <a href="/Admin/Subscribe/Delete/@item.Id" class="btn btn-danger">Sil</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+
+                    </tbody>
+                </table>
+            </div> <!-- /.table-stats -->
+        </div>
+    </div>
+</div>
+
+<row>
+    <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
+            <ul class="pagination">
+                @if (Model?.PrevPage == true)
+                {
+                       <li class="paginate_button page-item previous" id="bootstrap-data-table_previous">
+                        <a href="?page=@(Model.PageCount-1)" aria-controls="bootstrap-data-table" data-dt-idx="0" tabindex="0" class="page-link">Önceki</a>
+                    </li> 
+                }
+                @if (Model?.TotalPageCount > 0)
+                {
+                    for (int i = 0; i < Model.TotalPageCount + 1; i++)
+                    {
+                                <li class="paginate_button page-item @((Model.PageCount==i)?"active":"")"><a href="?page=@i" aria-controls="bootstrap-data-table" data-dt-idx="@(i+1)" tabindex="0" class="page-link">@(i + 1)</a></li>
+
+                    }
+                }
+                @if (Model?.NextPage == true)
+                {
+                        <li class="paginate_button page-item next" id="bootstrap-data-table_next"><a href="?page=@(Model.PageCount+1)" aria-controls="bootstrap-data-table" data-dt-idx="@(Model.TotalPageCount+1)" tabindex="0" class="page-link">Sonraki</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</row>
+
+
+
+
+

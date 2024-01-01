@@ -1,0 +1,92 @@
+﻿@model ContactInfoListDto
+@{
+    ViewData["Title"] = "Contact Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- banner -->
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="/">Anasayfa</a> / İletişim</span>
+        <h2>İletişim</h2>
+    </div>
+</div>
+<!-- banner -->
+
+
+<div class="container">
+    <div class="spacer">
+        <div class="row contact">
+            <form method="post" id="contactForm" class="col-lg-6 col-sm-6 ">
+
+                <input type="text" id="FullName" name="FullName" class="form-control" placeholder="Tam İsminiz">
+                <input type="text" id="Email" name="Email" class="form-control" placeholder="Eposta Adresiniz">
+                <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" placeholder="İletişim Numaranız">
+                <textarea rows="6" id="Message" name="Message" class="form-control" placeholder="Mesajınız"></textarea>
+                <button type="submit" class="btn btn-success" name="Submit">Mesajı Gönder</button>
+
+            </form>
+            <script>
+                document.getElementById('contactForm').addEventListener('submit', function (event) {
+                    // Form submit event handler
+                    event.preventDefault();
+                     let button = document.getElementById('contactForm').elements["Submit"]
+                            button.innerHTML = "Gönderiliyor";
+                    // Get form data
+                    var formData = {
+                        FullName: document.getElementById('FullName').value,
+                        Email: document.getElementById('Email').value,
+                        PhoneNumber: document.getElementById('PhoneNumber').value,
+                        Message: document.getElementById('Message').value
+                    };
+
+                    // Send POST request to "/Contact"
+                    fetch('/Contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                        .then(data => {
+                            // Handle success response
+                            let button = document.getElementById('contactForm').elements["Submit"]
+                            button.innerHTML = "Gönderildi";
+                            setTimeout(() => {
+                                button.innerHTML = "Mesajı Gönder"
+                            }, 10000)
+                            // İsteği gönderdikten sonra yapılacak işlemleri ekleyebilirsiniz.
+                        })
+                        .catch(error => {
+                            // Handle error response
+                            console.error('Error occurred:', error);
+                            // Hata durumunda yapılacak işlemleri ekleyebilirsiniz.
+                        });
+                });
+            </script>
+            <div class="col-lg-6 col-sm-6 ">
+                <div class="well">
+                    <div id="map" style="width: 100%; height: 400px"></div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                ymaps.ready(init);
+                function init() {
+                    var myMap = new ymaps.Map("map", {
+                        center: [@Model.LocationLatitude.ToString().Replace(",","."), @Model.LocationLongitude.ToString().Replace(",",".")],
+                        zoom: 9
+                    });
+
+                    var placemark = new ymaps.Placemark([@Model.LocationLatitude.ToString().Replace(",","."), @Model.LocationLongitude.ToString().Replace(",",".")], {
+                        hintContent: 'İstediğiniz Konum',
+                        balloonContent: '@Model.LocationLatitude, @Model.LocationLongitude'
+                    });
+
+                    myMap.geoObjects.add(placemark);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+

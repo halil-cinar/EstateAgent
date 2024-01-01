@@ -1,0 +1,23 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+<div style="height:100%">
+
+ <div class="d-flex align-items-center  justify-content-center h-100" style="height:max-content" >
+            <div class="text-center">
+            <h1 class="display-1 text-danger fw-bold">@((string.IsNullOrEmpty(Model.ResponseCode) ? "404" : Model.ResponseCode))</h1>
+            <p class="fs-3"> <span class="text-danger">Opps!</span> Sayfa Bulunamadı.</p>
+                <p class="lead">
+                Aradığınız sayfa mevcut değil.
+                  </p>
+                <a href="/" class="btn btn-primary">Go Home</a>
+        </div>
+        @if (Model.ShowRequestId)
+        {
+            <p>
+                <strong>Request ID:</strong> <code>@Model.RequestId</code>
+            </p>
+        }
+    </div>
+</div>

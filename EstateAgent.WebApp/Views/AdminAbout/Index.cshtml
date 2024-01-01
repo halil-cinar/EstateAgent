@@ -1,0 +1,21 @@
+﻿
+@model GenericLoadMoreDto<AboutListDto>
+
+@{
+    ViewData["Title"] = "Hakkında";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="card border border-primary">
+        <div class="card-header">
+            <strong class="card-title">@((Model?.Values?.Count>0)?Model?.Values?[0].Title:"")</strong>
+        </div>
+        
+        <div class="card-body">
+            <p class="card-text">@((Model?.Values?.Count > 0)?Model?.Values?[0].Content:"")</p>
+        </div>
+
+    </div>
+</div>
+

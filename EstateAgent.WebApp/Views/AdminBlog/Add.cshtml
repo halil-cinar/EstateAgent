@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Blog Ekleme";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<form class="col-lg-6" method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-header"><strong>Blog Ekleme</strong><small> </small></div>
+        <div class="card-body card-block">
+            <div class="form-group"><label for="Title" class=" form-control-label">Başlık</label><input type="text" id="Title" required name="Title" placeholder="Başlık Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Description" class=" form-control-label">Açıklama</label><input type="text" id="Description" required name="Description" placeholder="Blog ile alekalı kısa açıklama giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Image" class=" form-control-label">Fotoraf</label><input type="file" id="Image" required name="File" placeholder="" class="form-control"></div>
+            <div class="form-group"><label for="Content" class=" form-control-label">İçerik</label><textarea type="email" required id="Content" name="Content" placeholder="İçeriği giriniz" class="form-control"></textarea></div>
+
+
+            <input type="hidden" value="@ViewBag.LoginUserId"/>
+
+            <button type="submit" class="btn btn-outline-success ">Gönder</button>
+
+        </div>
+    </div>
+</form>

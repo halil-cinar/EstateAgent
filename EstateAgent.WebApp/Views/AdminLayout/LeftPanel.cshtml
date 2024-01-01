@@ -1,0 +1,252 @@
+﻿@using EstateAgent.Business.Abstract;
+@using EstateAgent.Entities.Enums;
+@inject IHttpContextAccessor httpContextAccessor
+@inject IAccountService accountService
+@{
+    var result = accountService.GetSession();
+    result.Wait();
+    if (result.Result.ResultStatus == EstateAgent.Dto.Enums.ResultStatus.Error || result.Result.Result == null)
+    {
+        httpContextAccessor.HttpContext.Response.Redirect("/");
+    }
+    else
+    {
+        var authResult = accountService.AuthorizationControl(result.Result.Result.Id);
+        authResult.Wait();
+        if (authResult.Result.ResultStatus == EstateAgent.Dto.Enums.ResultStatus.Error)
+        {
+            httpContextAccessor.HttpContext.Response.Redirect("/Error");
+        }
+
+        ViewBag.authMethod = authResult.Result.Result;
+
+
+    }
+}
+@*
+
+*@
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="/Admin/Home"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.UserAdd) || ViewBag.authMethod.Contains(MethodTypes.UserLoadMoreFilter) || ViewBag.authMethod.Contains(MethodTypes.UserUpdate)))
+                {
+                    <li class="menu-title">Profil</li>
+
+                    <!-- /.menu-title -->
+                    @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.UserUpdate))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Profil Ayarları</a>
+
+                            <ul class="sub-menu children dropdown-menu">
+
+                                <li><i class="fa fa-gear"></i><a href="/Admin/ProfileSetting">Profilimi Düzenle </a></li>
+                                <li><i class="fa fa-gear"></i><a href="/Admin/ProfileSetting/">Şifremi Değiştir</a></li>
+
+                            </ul>
+
+                        </li>
+                    }
+                    @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.UserAdd) || ViewBag.authMethod.Contains(MethodTypes.UserLoadMoreFilter)))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Kullanıcı Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.UserAdd))
+                                {
+                                    <li><i class="fa fa-gear"></i><a href="/Admin/UserActions/UserAdd">Kullanıcı Ekleme</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.UserLoadMoreFilter))
+                                {
+                                    <li><i class="fa fa-table"></i><a href="/Admin/UserActions">Kullanıcıları Görüntüle</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+                @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.AgentAdd)
+                || ViewBag.authMethod.Contains(MethodTypes.AgentLoadMoreFilter)
+                || ViewBag.authMethod.Contains(MethodTypes.PropertyAdd)
+                || ViewBag.authMethod.Contains(MethodTypes.PropertyLoadMoreFilter)))
+                {
+                    <li class="menu-title">Portfoy</li>
+
+                    <!-- /.menu-title -->
+                    @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.AgentAdd) || ViewBag.authMethod.Contains(MethodTypes.AgentLoadMoreFilter)))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Çalişan Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.AgentAdd))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/Portfoy/Agent/AgentAdd">Çalışan Ekleme</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.AgentLoadMoreFilter))
+                                {
+                                    <li><i class="menu-icon fa fa-table"></i><a href="/Admin/Portfoy/Agent">Çalişan Görüntüle</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.PropertyAdd) || ViewBag.authMethod.Contains(MethodTypes.PropertyLoadMoreFilter)))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Emlak Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.PropertyAdd))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/Portfoy/Property/Add">Emlak Ekle</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.PropertyLoadMoreFilter))
+                                {
+                                    <li><i class="menu-icon fa fa-table"></i><a href="/Admin/Portfoy/Property">Emlak Listele</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
+                }
+                @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.SubscribeAdd) || ViewBag.authMethod.Contains(MethodTypes.SubscribeLoadMoreFilter)))
+                {
+                    <li class="menu-title">Abone</li>
+
+                    <!-- /.menu-title -->
+                    @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.SubscribeAdd) || ViewBag.authMethod.Contains(MethodTypes.SubscribeLoadMoreFilter)))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Abone Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.SubscribeAdd))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/Subscribe/Add">Abone Ekle</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.SubscribeLoadMoreFilter))
+                                {
+                                    <li><i class="menu-icon fa fa-table"></i><a href="/Admin/Subscribe">Abone Listele</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+                @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.BlogAdd) || ViewBag.authMethod.Contains(MethodTypes.BlogLoadMoreFilter)))
+                {
+                    <li class=" menu-title">Blog</li>
+                    @if (ViewBag.authMethod != null && (ViewBag.authMethod.Contains(MethodTypes.BlogAdd) || ViewBag.authMethod.Contains(MethodTypes.BlogLoadMoreFilter)))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Blog Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.BlogAdd))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/Blog/BlogAdd">Blog Ekle</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.BlogLoadMoreFilter))
+                                {
+                                    <li><i class="menu-icon fa fa-table"></i><a href="/Admin/Blog">Blog Listele</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
+                }
+                @if (ViewBag.authMethod != null &&(
+                 ViewBag.authMethod.Contains(MethodTypes.AboutUpdate)
+                || ViewBag.authMethod.Contains(MethodTypes.AboutGet)
+                || ViewBag.authMethod.Contains(MethodTypes.AboutMediaUpdate)
+                || ViewBag.authMethod.Contains(MethodTypes.SystemSettingsUpdate)
+                || ViewBag.authMethod.Contains(MethodTypes.SystemSettingsGet)
+                || ViewBag.authMethod.Contains(MethodTypes.ContactInfoUpdate)
+                || ViewBag.authMethod.Contains(MethodTypes.ContactInfoGet)
+
+                ))
+                {
+                    <li class=" menu-title">Sayfa Ayarları </li>
+                    @if (ViewBag.authMethod != null && (
+                    ViewBag.authMethod.Contains(MethodTypes.AboutUpdate)
+                   || ViewBag.authMethod.Contains(MethodTypes.AboutGet)
+                   || ViewBag.authMethod.Contains(MethodTypes.AboutMediaUpdate)
+
+                   ))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Hakkımızda Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.AboutUpdate))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/About/Update">Hakkımızda Güncelle</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.AboutGet))
+                                {
+                                    <li><i class="menu-icon fa fa-table"></i><a href="/Admin/About">Hakkımızda Görüntüle</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.AboutMediaUpdate))
+                                {
+                                    <li><i class="menu-icon fa fa-table"></i><a href="/Admin/About/ChangePhoto">Hakkımızda Fotoraf Güncelleme</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
+
+                    @if (ViewBag.authMethod != null && (
+                    ViewBag.authMethod.Contains(MethodTypes.ContactInfoUpdate)
+                   || ViewBag.authMethod.Contains(MethodTypes.ContactInfoGet)
+
+                   ))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>İletişim Bilgileri Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.ContactInfoUpdate))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/ContactInfo/Update">İletişim bilgilerini Güncelle</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.ContactInfoGet))
+                                {
+                                    <li><i class="menu-icon fa fa-table"></i><a href="/Admin/ContactInfo">İletişim bilgilerini Görüntüle</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
+                    @if (ViewBag.authMethod != null &&(
+                   ViewBag.authMethod.Contains(MethodTypes.SystemSettingsUpdate)
+                   || ViewBag.authMethod.Contains(MethodTypes.SystemSettingsGet)
+
+                   ))
+                    {
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>İleri Seviye Ayarlar</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.SystemSettingsUpdate))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/Advanced/Logo">Logo Güncelle</a></li>
+                                }
+                                @if (ViewBag.authMethod != null && ViewBag.authMethod.Contains(MethodTypes.SystemSettingsUpdate))
+                                {
+                                    <li><i class="menu-icon fa fa-gear"></i><a href="/Admin/Advanced">Tüm sistem Ayarlarını değiştir</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
+                }
+                <li class=" menu-title">Çıkış yap</li>
+                <li class="menu-item-has-children dropdown">
+
+                    <a href="javascript:void(0);" onclick="document.getElementById('logout').submit();" class="dropdown-toggle w-100"> <i class=" menu-icon fa fa-power-off"></i>Çıkış Yap</a>
+
+                </li>
+
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->

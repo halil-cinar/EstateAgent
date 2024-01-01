@@ -1,0 +1,93 @@
+﻿@model BlogListDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- banner -->
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="/">Anasayfa</a> / @Model.Title</span>
+        <h2>@Model.Title</h2>
+    </div>
+</div>
+<!-- banner -->
+
+
+<div class="container">
+    <div class="spacer blog">
+        <div class="row">
+            <div class="col-lg-8">
+
+                <!-- blog detail -->
+                <h2>@Model.Title</h2>
+                <div class="info">Yayınlanma Tarihi: @Model.PostedDate.ToString("D")</div>
+                <img src="/Media/@Model.MediaId" class="thumbnail img-responsive" alt="blog title">
+
+                <p>@Model.Description</p>
+                <p>@Model.Content</p>
+                <!-- blog detail -->
+
+
+
+
+            </div>
+            <div class="col-lg-4 visible-lg">
+
+                <!-- tabs -->
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Son Gönderiler</a></li>
+                        @*<li class=""><a href="#tab2" data-toggle="tab">Most Popular</a></li>*@
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <ul class="list-unstyled">
+                                @if (ViewBag.RecentBlogs?.Values.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.RecentBlogs.Values)
+                                    {
+                                        <li>
+                                            <h5><a href="/blogdetail/@item.Id">@item.Title</a></h5>
+                                            <div class="info">Yayınlanma Tarihi: @item.PostedDate.ToString("D")</div>
+                                        </li>
+                                    }
+                                }
+
+
+                            </ul>
+                        </div>
+                        @*<div class="tab-pane" id="tab2">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <h5><a href="blogdetail">Market update on new apartments</a></h5>
+                                    <div class="info">Yayınlanma Tarihi: Jan 20, 2013</div>
+                                </li>
+
+                                <li>
+                                    <h5><a href="blogdetail">Market update on new apartments</a></h5>
+                                    <div class="info">Yayınlanma Tarihi: Jan 20, 2013</div>
+                                </li>
+
+                                <li>
+                                    <h5><a href="blogdetail">Market update on new apartments</a></h5>
+                                    <div class="info">Yayınlanma Tarihi: Jan 20, 2013</div>
+                                </li>
+                            </ul>
+                        </div>*@
+
+                    </div>
+
+
+
+                </div>
+                <!-- tabs -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

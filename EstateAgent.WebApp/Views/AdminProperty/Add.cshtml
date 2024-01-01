@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Mülk Ekleme";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<form class="col-lg-6" method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-header"><strong>Mülk Ekleme</strong><small> </small></div>
+        <div class="card-body card-block">
+            <div class="form-group"><label for="Title" class=" form-control-label">Başlık</label>                       <input required type="text" id="Title" name="Title" placeholder="Başlık Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Price" class=" form-control-label">Fiyat</label>                        <input required type="number" id="Price" name="Price" placeholder="Fiyat Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Address" class=" form-control-label">Adres</label>                      <input required type="text" id="Address" name="Address" placeholder="Adres Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Details" class=" form-control-label">Detaylar</label>                <textarea required type="text" id="Details" name="Details" placeholder="Detayları Giriniz" class="form-control"></textarea></div>
+                                                                                                                               
+            <div class="form-group"><label for="BedRoomCount" class=" form-control-label">Yatak Odası Sayısı</label>    <input required type="number" id="BedRoomCount" name="BedRoomCount" placeholder="Yatak odası sayısı giriniz" class="form-control"></div>
+            <div class="form-group"><label for="LivingRoomCount" class=" form-control-label">Oturma Odası Sayısı</label><input required type="number" id="LivingRoomCount" name="LivingRoomCount" placeholder="Oturma odası sayısı giriniz" class="form-control"></div>
+            <div class="form-group"><label for="ParkingCount" class=" form-control-label">Park Sayısı</label>           <input required type="number" id="ParkingCount" name="ParkingCount" placeholder="Park sayısı giriniz" class="form-control"></div>
+            <div class="form-group"><label for="KitchenCount" class=" form-control-label">Mutfak Sayısı</label>         <input required type="number" id="KitchenCount" name="KitchenCount" placeholder="Mutfak sayısı giriniz" class="form-control"></div>
+                                                                                                                               
+            <div class="form-group"><label for="LocationLatitude" class=" form-control-label">Enlem</label>             <input required type="text" id="LocationLatitude" name="LocationLatitude" placeholder="Konuma ait enlem giriniz  " class="form-control"></div>
+            <div class="form-group"><label for="LocationLongitude" class=" form-control-label">Boylam</label>           <input required type="text" id="LocationLongitude" name="LocationLongitude" placeholder="Konuma ait boylam giriniz" class="form-control"></div>
+
+
+
+            <div class="form-group">
+                <label for="select" class=" form-control-label">Satiş Durumu Giriniz</label>
+
+                <select name="PropertySaleStatus" required id="select" class="form-control">
+                    <option value="0">Lütfen Seçiniz</option>
+                    @foreach (var item in ViewBag.StatusOptionList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="select" class=" form-control-label">Çalişan Seçiniz</label>
+
+                <select name="AgentId" required id="select" class="form-control">
+                    <option value="0">Lütfen Seçiniz</option>
+                    @foreach (var item in ViewBag.AgentOptionList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                    
+                    
+                </select>
+            </div>
+
+
+
+            
+
+            <div class="form-group">
+                <label for="file-input" class=" form-control-label">Mülke ait tüm resimleri seçiniz (Daha sonra güncelle bölümnden sıralamasını değiştirebilirsiniz)</label>
+                <input type="file" id="file-input" required multiple name="Files" class="form-control-file">
+            </div>
+
+            <button type="submit" class="btn btn-outline-success ">Gönder</button>
+
+        </div>
+    </div>
+</form>
+

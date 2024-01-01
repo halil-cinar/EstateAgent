@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "ChangePhoto";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+<div class="col col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <strong>Fotoraf Güncelleme</strong>
+        </div>
+        <div class="card-body card-block">
+            <form action="/Admin/UserActions/ChangePhoto" method="post" class="form-inline" enctype="multipart/form-data">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="form-group">
+                        <img width="50" height="50" style="display:@((Model.ProfilePhotoId==null||Model.ProfilePhotoId==0)?"none":"")" src="/Media/@Model.ProfilePhotoId" />
+                    </div>
+                    <div class="  form-group">
+                        <div class="col col-md-3"><label for="file-input" class=" form-control-label">Dosya Seç</label></div>
+                        <div class="col-12 col-md-9"><input required type="file" id="file-input" name="ProfilePhoto" class="form-control-file"></div>
+                    </div>
+                </div>
+                <div class="form-actions form-group"><button type="submit" class="btn btn-secondary btn-sm">Güncelle</button></div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+

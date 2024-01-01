@@ -1,0 +1,168 @@
+﻿@using EnumsNET;
+@model GenericLoadMoreDto<PropertyListDto>
+@{
+    ViewData["Title"] = "Emlaklarımız";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- banner -->
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="/">Home</a> / Buy, Sale & Rent</span>
+        <h2>Satılık &amp; Kiralık Mülkler</h2>
+    </div>
+</div>
+<!-- banner -->
+
+
+<div class="container">
+    <div class="properties-listing spacer">
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-4 ">
+
+                <form method="post"  class="search-form h-100">
+                    <h4><span class="glyphicon glyphicon-search"></span> Ara</h4>
+                    <input type="text" name="Search" value="@ViewBag.search" class="form-control" placeholder="Mülklerde Ara">
+                    <div class="row h-100">
+                        <div class="col-lg-12">
+                            <select name="Status" id="status-select" class="form-control">
+                                <option value="0">Durum</option>
+                                @foreach (var item in ViewBag.StatusOptionList)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                                
+                                
+                            </select>
+                        </div>
+                        <div class="col-lg-12">
+                            <select name="PriceSelect" id="price-select" class="form-control">
+                                <option value="0">Fiyat</option>
+                                <option value="1">$150,000 - $200,000</option>
+                                <option value="2">$200,000 - $250,000</option>
+                                <option value="3">$250,000 - $300,000</option>
+                                <option value="4">$300,000 - above</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    @*<div class="row">
+                        <div class="col-lg-12">
+                            <select class="form-control">
+                                <option>Property Type</option>
+                                <option>Apartment</option>
+                                <option>Building</option>
+                                <option>Office Space</option>
+                            </select>
+                        </div>
+                    </div>*@
+                    <button type="submit" class="btn btn-primary">Bul</button>
+
+                </form>
+
+
+
+                <div class="hot-properties hidden-xs">
+                    @*<h4>Hot Properties</h4>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="propertydetail">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="propertydetail">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="propertydetail">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="propertydetail">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>*@
+
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-9 col-sm-8">
+                <div class="sortby clearfix">
+                    <div class="pull-left result">Showing: @(Model.ContentCount*Model.PageCount) içinde @Model.TotalContentCount </div>
+                    <div class="pull-right">
+                        @*<select class="form-control">
+                            <option>Sort by</option>
+                            <option>Fiyat: Low to High</option>
+                            <option>Fiyat: High to Low</option>
+                        </select>*@
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    @if (Model?.Values?.Count > 0)
+                    {
+                        foreach (var item in Model.Values)
+                        {
+                            <!-- properties -->
+                            <div class="col-lg-4 col-sm-6" style="height:max-content">
+                                <div class="properties">
+                                    <div class="image-holder">
+                                        <img src="/Media/@item.PropertyMediaLists.FirstOrDefault()?.MediaId" class="img-responsive" alt="properties">
+                                        <div class="status sold">@(item.PropertySaleStatus.AsString(EnumFormat.Description))</div>
+                                    </div>
+                                    <h4><a href="propertydetail/@item.Id">@item.Title</a></h4>
+                                    <p class="price">Fiyat: $@item.Price</p>
+                                    <div class="listing-detail">
+                                        <span data-toggle="tooltip" data-placement="bottom" data-original-title="Yatak Odası">@item.BedRoomCount</span>
+                                        <span data-toggle="tooltip" data-placement="bottom" data-original-title="Oturma Odası">@item.LivingRoomCount</span> 
+                                        <span data-toggle="tooltip" data-placement="bottom" data-original-title="Park">@item.ParkingCount</span> 
+                                        <span data-toggle="tooltip" data-placement="bottom" data-original-title="Mutfak">@item.KitchenCount</span> 
+                                    </div>
+                                    <a class="btn btn-primary" href="propertydetail/@item.Id">Detaylar</a>
+                                </div>
+                            </div>
+                            <!-- properties -->
+                        }
+                    }
+                    
+                   
+                   
+
+                </div>
+                <div class="center">
+                    <ul class="pagination">
+                        <li><a href="?page=0&&status=@ViewBag.status&&minPrice=@ViewBag.minPrice&&maxPrice=@ViewBag.maxPrice&&search=@ViewBag.search">«</a></li>
+                        @for (int i = 0; i < ((Model.TotalPageCount==0)?1:Model.TotalPageCount); i++)
+                        {
+                            <li><a href="?page=@i">@(i+1)</a></li>
+                        }
+                        <li><a href="?page=@Model.TotalPageCount">»</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('price-select').value = "@((ViewBag.Price != null) ? ViewBag.Price : 0)"
+    document.getElementById('status-select').value ="@((ViewBag.status!=null)?Convert.ToInt32(ViewBag.status):0)"
+   
+</script>
+

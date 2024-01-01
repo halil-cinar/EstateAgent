@@ -1,0 +1,65 @@
+﻿@model GenericLoadMoreDto<AboutListDto>
+@{
+    ViewData["Title"] = "About Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- banner -->
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="#">Ana Sayfa</a> / Hakkımızda</span>
+        <h2>About Us</h2>
+    </div>
+</div>
+<!-- banner -->
+
+
+<div class="container">
+    <div class="spacer">
+        <div class="row">
+            <div class="col-lg-8  col-lg-offset-2">
+                @if (ViewBag.AboutMediaLists != null)
+                {
+                    <!-- Slider Starts -->
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators hidden-xs">
+
+                            @if (ViewBag.AboutMediaLists?.Count > 0)
+                            {
+                                for (int i = 0; i < ViewBag.AboutMediaLists.Count; i++)
+                                {
+                                    var item = ViewBag.AboutMediaLists[i];
+                                    <li data-target="#myCarousel" data-slide-to="@i" class="@((i==0)?"active":"")"></li>
+                                }
+                            }
+
+                        </ol>
+                        <div class="carousel-inner">
+                            @if (ViewBag.AboutMediaLists?.Count > 0)
+                            {
+                                for (int i = 0; i < ViewBag.AboutMediaLists.Count; i++)
+                                {
+                                    var item = ViewBag.AboutMediaLists[i];
+                                    <!-- Item @i -->
+                                    <div class="item w-100 @((i==0)?"active":"")">
+                                        <img src="/Media/@item.MediaId" class="properties" alt="properties" />
+                                    </div>
+                                    <!-- #Item @i -->
+                                }
+                            }
+
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                    <!-- #Slider Ends -->
+                }
+                <h2>@((Model?.Values?.Count > 0) ? Model?.Values?[0].Title : "")</h2>
+                <pre class="h3" style="border:0 ">@((Model?.Values?.Count > 0) ? Model?.Values?[0].Content : "")</pre>
+            </div>
+
+        </div>
+    </div>
+</div>
+

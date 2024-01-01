@@ -1,0 +1,120 @@
+﻿@model PropertyListDto
+@{
+    ViewData["Title"] = $"{Model.Title}";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-8">
+        <!--Images-->
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                
+                @for (int i = 0; i < Model.PropertyMediaLists.Count; i++)
+                {
+                    var item = Model.PropertyMediaLists[i];
+                     <div class="carousel-item @((i==0)?"active":"")">
+                          <img class="d-block w-100" src="/Media/@item.MediaId" alt="@(i+1). slide">
+                      </div>
+                }
+               
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Önceki</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Sonraki</span>
+            </a>
+        </div>
+
+        
+
+     
+
+    </div>
+
+    <div class="col-lg-4">
+        <div class="col-lg-12  col-sm-6">
+            <div class="property-info">
+                <h3 class="price">$ @Model.Price</h3>
+                <h4 class="area"><span class="ti-map-alt"></span> @Model.Address</h4>
+
+                <div class="profile">
+                    <h6><strong><span class="ti-user"></span> Çalişan Detayları</strong></h6>
+                    <h6>@Model.AgentName @Model.AgentPhoneNumber</h6>
+                </div>
+            </div>
+
+            <h6><strong><span class="glyphicon glyphicon-home"></span> Ayrıntılar</strong></h6>
+            <div class="listing-detail">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Yatak Odası</th>
+                            <th scope="col">Mutfak</th>
+                            <th scope="col">Oturma Odası</th>
+                            <th scope="col">Park sayısı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">@Model.BedRoomCount</th>
+                            <td>@Model.KitchenCount</td>
+                            <td>@Model.LivingRoomCount</td>
+                            <td>@Model.ParkingCount</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            
+            <h6><strong><span class="glyphicon glyphicon-map-marker"></span> Konum</strong></h6>
+            <div class="listing-detail">
+               <div class="well">
+                    <div id="map" style="width: 100%; height: 400px"></div>
+                </div>
+            </div>
+            <h6><strong><span class="glyphicon glyphicon-home"></span> Detaylar</strong></h6>
+            <div class="listing-detail">
+                <p>
+                    <!--Details-->
+                    @Model.Details
+                </p>
+            </div>
+            
+            <div>
+                @if (ViewBag.CanDelete)
+                {
+                    <a href="/Admin/Portfoy/Property/Delete/@Model.Id" class="btn btn-danger">Sil</a>
+                }
+                @if (ViewBag.CanUpdate)
+                {
+                    <a href="/Admin/Portfoy/Property/Update/@Model.Id" class="btn btn-warning">Güncelle</a>
+                    <a href="/Admin/Portfoy/Property/ChangePhoto/@Model.Id" class="btn btn-secondary">Resimleri güncelle</a>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript">
+        ymaps.ready(init);
+        function init(){ 
+            var myMap = new ymaps.Map("map", {
+            center: [@Model.LocationLatitude.ToString().Replace(",","."), @Model.LocationLongitude.ToString().Replace(",",".")],
+                zoom: 9
+            });
+            
+        var placemark = new ymaps.Placemark([@Model.LocationLatitude.ToString().Replace(",","."), @Model.LocationLongitude.ToString().Replace(",",".")], {
+            hintContent: 'İstediğiniz Konum',
+            balloonContent: '@Model.LocationLatitude, @Model.LocationLongitude'
+        });
+
+        myMap.geoObjects.add(placemark);
+         }
+    </script>
+

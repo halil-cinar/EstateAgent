@@ -1,0 +1,25 @@
+﻿@model UserListDto
+@{
+    ViewData["Title"] = "Kullanıcı Güncelle";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+<form class="col-lg-12" method="post">
+    <div class="card">
+        <div class="card-header"><strong>Kullanıcı Güncelle</strong><small> </small></div>
+        <div class="card-body card-block">
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <div class="form-group"><label for="Name" class=" form-control-label">İsim</label>                  <input required type="text" value="@Model.Name" id="Name" name="Name" placeholder="İsim giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Surname" class=" form-control-label">Soyisim</label>            <input required type="text" value="@Model.Surname" id="Surname" name="Surname" placeholder="Soyisim giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Age" class=" form-control-label">Doğum Tarihi</label>           <input required type="date" id="Date" value="@Model.BirthDate.ToString("yyyy-MM-dd")" name="BirthDate" placeholder="Doğum Tarihi giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Email" class=" form-control-label">Eposta</label>               <input required type="text" id="Email" value="@Model.Email" name="Email" placeholder="Eposta Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="PhoneNumber" class="form-control-label">Telefon Numarası</label><input required type="tel" value="@Model.PhoneNumber" id="PhoneNumber" name="PhoneNumber" placeholder="Telefon Numarası Giriniz" class="form-control"></div>
+
+
+
+            <button type="submit" class="btn btn-outline-success ">Güncelle</button>
+
+        </div>
+    </div>
+</form>
+

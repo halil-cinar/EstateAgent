@@ -1,0 +1,76 @@
+﻿@model UserListDto
+@{
+    ViewData["Title"] = "Profil Ayarları";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="row">
+<form class="col-lg-6" method="post">
+    <div class="card">
+        <div class="card-header"><strong>Profil Ayarları</strong><small> </small></div>
+        <div class="card-body card-block">
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+            <div class="form-group"><label for="Name" class=" form-control-label">İsim</label><input type="text" required value="@Model.Name" id="Name" name="Name" placeholder="İsminizi Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Surname" class=" form-control-label">Soyisim</label><input type="text" required value="@Model.Surname" id="Surname" name="Surname" placeholder="Soyisminizi Giriniz" class="form-control"></div>
+                <div class="form-group"><label for="Age" class=" form-control-label">Doğum Tarihi</label><input type="date" required id="Date" value="@Model.BirthDate.ToString("yyyy-MM-dd")" name="BirthDate" placeholder="Doğum Tarihi Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Email" class=" form-control-label">Eposta</label><input type="text"  id="Email" required value="@Model.Email" name="Email" placeholder="Eposta Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="PhoneNumber" class=" form-control-label">Telefon Numarası</label><input type="tel" required value="@Model.PhoneNumber" id="PhoneNumber"  name="PhoneNumber" placeholder="Telefon Numarası Giriniz" class="form-control"></div>
+           
+            <button type="submit" class="btn btn-outline-success ">Gönder</button>
+
+        </div>
+    </div>
+</form>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">Şifremi değiştir</div>
+            <div class="card-body card-block">
+                    <form action="/Admin/ProfileSetting/ChangePassword" method="post" class="">
+                        <input type="hidden" name="Id" value="@Model.Id"/>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" id="username2" required name="Username" placeholder="Kullanıcı Adınız" class="form-control">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="password" id="password2" required name="Password" placeholder="Şifreniz" class="form-control">
+                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                        </div>
+                    </div>
+                    <div class="form-actions form-group"><button type="submit" class="btn btn-secondary btn-sm">Güncelle</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Profil Fotorafı Değiştir</strong> 
+            </div>
+            <div class="card-body card-block">
+                <form action="/Admin/ProfileSetting/ChangePhoto" method="post" class="form-inline" enctype="multipart/form-data">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="form-group">
+                        <img width="50" height="50" style="display:@((Model.ProfilePhotoId==null||Model.ProfilePhotoId==0)?"none":"")"  src="/Media/@Model.ProfilePhotoId"/>
+                    </div>
+                   <div class="  form-group">
+                       <div class="col col-md-3"><label for="file-input" class=" form-control-label">Dosya Seçiniz</label></div>
+                            <div class="col-12 col-md-9"><input type="file" required id="file-input" name="ProfilePhoto" class="form-control-file"></div>
+                        </div>
+                    </div>
+                    <div class="form-actions form-group"><button type="submit" class="btn btn-secondary btn-sm">Güncelle</button></div>
+
+                </form>
+            </div>
+    
+        </div>
+    </div>
+
+</div>

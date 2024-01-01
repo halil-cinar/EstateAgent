@@ -1,0 +1,24 @@
+﻿@model BlogListDto
+@{
+    ViewData["Title"] = $"{Model.Title} Güncelleme";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+
+<form class="col-lg-6" method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-header"><strong>Company</strong><small> Form</small></div>
+        <div class="card-body card-block">
+           <input type="hidden" name="Id" value="@Model.Id"/>
+            <div class="form-group"><label for="Title" class=" form-control-label">Başlık</label><input type="text" required value="@Model.Title" id="Title" name="Title" placeholder="Başlık Giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Description" class=" form-control-label">Kısa Açıklama</label><input required type="text" value="@Model.Description" id="Description" name="Description" placeholder="Açıklama giriniz" class="form-control"></div>
+            <div class="form-group"><label for="Content" class=" form-control-label">İçerik</label><textarea required type="email" id="Content" name="Content" placeholder="İçerik giriniz" class="form-control">@Model.Content</textarea></div>
+
+           
+
+            <button type="submit" class="btn btn-outline-success ">Gönder</button>
+
+        </div>
+    </div>
+</form>
+

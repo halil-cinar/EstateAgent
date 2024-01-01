@@ -1,0 +1,94 @@
+﻿@model AgentListDto
+@{
+    ViewData["Title"] = Model.UserName+" "+Model.UserSurname+" Detail";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            
+            <div class="card-body">
+
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false">Çalişan Profili</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Kullanıcı Profili</a>
+                    </li>
+                   
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                         <div class="feed-box text-center">
+                            <section class="card">
+                                <div class="card-body">
+                                    <div class="corner-ribon blue-ribon">
+                                        <i class="fa fa-twitter"></i>
+                                    </div>
+                                    <a href="/Media/@Model.MediaId" target="_blank">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="/Media/@Model.MediaId">
+                                    </a>
+                                    <h2>@Model.Name</h2>
+                                    <p>@Model.PhoneNumber</p>
+                                    <p><a href="mailto:@Model.Email">@Model.Email</a></p>
+                                    <p>
+                                        @Model.Description
+                                    </p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-around text-muted">
+                                    <a href="/Admin/Portfoy/Agent/Detail/@Model.Id" class="btn btn-info">Görüntüle</a>
+                                    @if (ViewBag.CanDelete)
+                                    {
+                                        <a href="/Admin/Portfoy/Agent/Delete/@Model.Id" class="btn btn-danger">Sil</a>
+                                    }
+                                    @if (ViewBag.CanUpdate)
+                                    {
+                                        <a href="/Admin/Portfoy/Agent/Update/@Model.Id" class="btn btn-warning">Güncelle</a>
+                                        <a href="/Admin/Portfoy/Agent/ChangePhoto/@Model.Id" class="btn btn-success">Fotorafı değiştir</a>
+                                        <a href="/Admin/Portfoy/Agent/ChangeUser/@Model.Id" class="btn btn-secondary">Kullanıcıyı değiştir</a>
+                                    }
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="feed-box text-center">
+                            <section class="card">
+                                <div class="card-body">
+                                    <div class="corner-ribon blue-ribon">
+                                        <i class="fa fa-twitter"></i>
+                                    </div>
+                                    <a href="/Media/@Model.UserProfilePhotoId" target="_blank">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="/Media/@Model.MediaId">
+                                    </a>
+                                    <h2>@Model.UserName @Model.UserSurname</h2>
+                                    <p>@Model.UserPhoneNumber</p>
+                                    <p><a href="mailto:@Model.UserEmail">@Model.UserEmail</a></p>
+                                    <p>
+                                        @Model.UserBirthDate
+                                    </p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-around text-muted">
+                                   
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

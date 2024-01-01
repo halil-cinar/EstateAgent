@@ -1,0 +1,143 @@
+﻿@model List<AboutMediaListDto>
+@{
+    ViewData["Title"] = "Hakkımızda fotoraf güncelleme";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="row">
+
+
+    @if (Model?.Count > 0)
+    {
+        for (int i = 0; i < Model?.Count; i++)
+        {
+            var item = Model[i];
+            <div class="col-12 col-xl-6 d-flex justify-content-between">
+                <div class="float-left">
+                    <img src="/Media/@item.MediaId" />
+                </div>
+                <div>
+                    <div class="card" style="min-width:max-content">
+                        <div class="card-body card-block">
+
+                            <form action="/Admin/About/ChangePhoto/@item.Id" method="post" class="">
+                                <input type="hidden" name="Id" value="@item.Id" />
+                                <input type="hidden" name="PropertyId" value="@ViewBag.PropertyId" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Başlık</div>
+                                        <input type="text" id="title" value="@item.Title" name="Title" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Açıklama</div>
+                                        <input type="text" id="description" value="@item.Description" name="Description" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-actions form-group d-flex justify-content-center w-100">
+                                    @if (ViewBag.CanUpdate)
+                                    {
+                                        <button type="submit" class="btn btn-warning text-center ">Güncelle</button>
+                                    }
+                                </div>
+                            </form>
+                            <div class="d-flex justify-content-between">
+                                <form action="/Admin/About/ChangePhoto/Swap/@item.Id" method="post">
+                                    <input type="hidden" name="Id" value="@item.Id" />
+                                    <input type="hidden" name="SlideIndex" value="@(item.SlideIndex-1)" />
+                                    @if (ViewBag.CanUpdate && item.SlideIndex != ViewBag.MinSlideIndex)
+                                    {
+                                        <button  type="submit" class="btn btn-success"><span class="ti-arrow-up"></span> Öne al </button>
+                                    }
+                                </form>
+                                <form action="/Admin/About/ChangePhoto/Swap/@item.Id" method="post">
+                                    <input type="hidden" name="Id" value="@item.Id" />
+                                    <input type="hidden" name="SlideIndex" value="@(item.SlideIndex+1)" />
+                                    @if (ViewBag.CanUpdate && item.SlideIndex != ViewBag.MaxSlideIndex)
+                                    {
+                                        <button type="submit" class="btn btn-success"><span class="ti-arrow-down"></span> Arkaya al </button>
+                                    }
+                                </form>
+                            </div>
+                            <div class="d-flex justify-content-center w-100">
+                                <form method="post" action="/Admin/About/ChangePhoto/Photo/@item.Id" class="row form-group" enctype="multipart/form-data">
+                                    <div class="col col-md-12">
+                                        <input type="hidden" name="Id" value="@item.Id" />
+                                        <div class="input-group">
+                                            <input type="file" name="File" required placeholder="File" class="form-control">
+                                            <div class="input-group-btn">
+                                                @if (ViewBag.CanUpdate)
+                                                {
+                                                    <button type="submit" class="btn btn-secondary" style="margin-right:10px">Resmi Güncelle</button>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                            <div class="d-flex justify-content-center w-100">
+                                @if (ViewBag.CanDelete)
+                                {
+                                    <a href="/Admin/About/ChangePhoto/Delete/@item.Id" class="btn btn-danger">Sil</a>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    }
+
+    <div class="col-12 col-xl-6 d-flex justify-content-between w-100">
+
+        <div>
+            <div class="card w-100">
+                <div class="card-body card-block w-100">
+                    <form action="/Admin/About/ChangePhoto/Add" method="post" class="w-100" enctype="multipart/form-data">
+
+                        <input type="hidden" name="SlideIndex" value="@(ViewBag.MaxSlideIndex+1)" />
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Başlık</div>
+                                <input type="text" id="title" name="Title" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Açıklama</div>
+                                <input type="text" id="description" name="Description" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Fotoraf</div>
+                                <input type="file" required name="File" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-actions form-group d-flex justify-content-center w-100">
+                            @if (ViewBag.CanUpdate)
+                            {
+                                <button type="submit" class="btn btn-warning text-center ">Ekle</button>
+                            }
+                        </div>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
