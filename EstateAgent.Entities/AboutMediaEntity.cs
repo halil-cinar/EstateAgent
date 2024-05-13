@@ -13,12 +13,17 @@ namespace EstateAgent.Entities
     {
         public int? SlideIndex { get; set; }
 
+       
+
         public long MediaId { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
 
         [ForeignKey(nameof(MediaId))]
         public MediaEntity Media { get; set; }
+
+
+       
 
 
     }

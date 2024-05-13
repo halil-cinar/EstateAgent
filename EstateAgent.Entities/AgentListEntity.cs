@@ -29,5 +29,15 @@ namespace EstateAgent.Entities
         public long? UserProfilePhotoId { get; set; }
 
 
+        public AgentListEntity()
+        {
+
+        }
+
+        public AgentListEntity(int a)
+        {
+
+        }
+
     }
 }

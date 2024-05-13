@@ -147,12 +147,12 @@
                 </div>
                 <div class="center">
                     <ul class="pagination">
-                        <li><a href="?page=0&&status=@ViewBag.status&&minPrice=@ViewBag.minPrice&&maxPrice=@ViewBag.maxPrice&&search=@ViewBag.search">«</a></li>
+                        <li><a href="?page=0 @((ViewBag.status!=null)?"&&status="+ViewBag.status:"") @((ViewBag.minPrice!=null)?"&&minPrice="+ViewBag.minPrice:"")@((ViewBag.maxPrice!=null)?"&&maxPrice="+ViewBag.maxPrice:"")@((ViewBag.search!=null)?"&&search="+ViewBag.search:"")">«</a></li>
                         @for (int i = 0; i < ((Model.TotalPageCount==0)?1:Model.TotalPageCount); i++)
                         {
-                            <li><a href="?page=@i">@(i+1)</a></li>
+                            <li><a href="?page=@i @((ViewBag.status!=null)?"&&status="+ViewBag.status:"") @((ViewBag.minPrice!=null)?"&&minPrice="+ViewBag.minPrice:"")@((ViewBag.maxPrice!=null)?"&&maxPrice="+ViewBag.maxPrice:"")@((ViewBag.search!=null)?"&&search="+ViewBag.search:"")">@(i + 1)</a></li>
                         }
-                        <li><a href="?page=@Model.TotalPageCount">»</a></li>
+                        <li><a href="?page=@Model.TotalPageCount @((ViewBag.status!=null)?"&&status="+ViewBag.status:"") @((ViewBag.minPrice!=null)?"&&minPrice="+ViewBag.minPrice:"")@((ViewBag.maxPrice!=null)?"&&maxPrice="+ViewBag.maxPrice:"")@((ViewBag.search!=null)?"&&search="+ViewBag.search:"")">»</a></li>
                     </ul>
                 </div>
             </div>

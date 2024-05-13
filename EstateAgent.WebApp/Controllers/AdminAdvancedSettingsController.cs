@@ -88,7 +88,7 @@ namespace EstateAgent.WebApp.Controllers
             {
                 return Redirect("/");
             }
-            var result = await _systemSettingService.Get("logo");
+            var result = await _systemSettingService.GetLogo();
             if (result.ResultStatus == Dto.Enums.ResultStatus.Success)
             {
                 return View(result.Result);

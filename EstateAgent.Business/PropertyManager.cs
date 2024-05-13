@@ -256,7 +256,7 @@ namespace EstateAgent.Business
                         && (filter.Filter.AgentId == null || filter.Filter.AgentId == x.AgentId)
                         && (filter.Filter.PropertySaleStatus == null || filter.Filter.PropertySaleStatus == x.PropertySaleStatus)
                         && (filter.Filter.MinPrice == null || filter.Filter.MinPrice <= x.Price)
-                        && (filter.Filter.MaxPrice == null || filter.Filter.MaxPrice == x.Price)
+                        && (filter.Filter.MaxPrice == null || filter.Filter.MaxPrice >= x.Price)
                         && (filter.Filter.MaxParkingCount == null || filter.Filter.MaxParkingCount >= x.ParkingCount)
                         && (filter.Filter.MinParkingCount == null || filter.Filter.MinParkingCount <= x.ParkingCount)
                         && (filter.Filter.MaxKitchenCount == null || filter.Filter.MaxKitchenCount >= x.KitchenCount)

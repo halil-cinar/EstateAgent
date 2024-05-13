@@ -32,6 +32,7 @@
     <ProjectReference Include="..\EstateAgent.Core\EstateAgent.Core.csproj" />
     <ProjectReference Include="..\EstateAgent.DataAccess\EstateAgent.DataAccess.csproj" />
     <ProjectReference Include="..\EstateAgent.Dto\EstateAgent.Dto.csproj" />
+    <ProjectReference Include="..\EstateAgent.Entities\EstateAgent.Entities.csproj" />
   </ItemGroup>
 
 </Project>

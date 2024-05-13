@@ -27,5 +27,6 @@ namespace EstateAgent.Entities
 
         public string IdentityUserName { get; set; }
 
+      
     }
 }

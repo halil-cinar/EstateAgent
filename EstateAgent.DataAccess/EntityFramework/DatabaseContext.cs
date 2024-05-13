@@ -11,7 +11,7 @@ namespace EstateAgent.DataAccess.EntityFramework
 {
     public class DatabaseContext:DbContext
     {
-        public DatabaseContext():base("server=.;Initial Catalog=RealEstateDB;Integrated Security=True")
+        public DatabaseContext():base("server=localhost/DESKTOP-FOCIP6T;Initial Catalog=RealEstateDB;Integrated Security=True")
         {
 
         }

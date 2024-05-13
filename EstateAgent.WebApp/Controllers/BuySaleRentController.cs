@@ -28,7 +28,7 @@ namespace EstateAgent.WebApp.Controllers
             var url = "/buysalerent?";
             if (propertySearch != null)
             {
-                url += (page != null) ? "page="+page : "";
+                url += (page != null) ? "page="+page+"&&" : "";
                 url += (propertySearch.Status != null) ? "status=" + propertySearch.Status+"&&" : "";
                 url += (propertySearch.Search != null) ? "search=" + propertySearch.Search+"&&" : "";
                 url += (propertySearch.PriceSelect != null)
@@ -69,6 +69,7 @@ namespace EstateAgent.WebApp.Controllers
             ViewBag.MaxPrice = maxPrice;
             ViewBag.Search = search;
             ViewBag.Price = price;
+
             var result = await _propertyService.LoadMoreFilter(new Dto.Filter.LoadMoreFilter<Dto.Dtos.PropertyFilter>
             {
                 ContentCount = 12,

@@ -26,6 +26,8 @@ namespace EstateAgent.WebApp
             builder.Services.AddControllersWithViews();
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+            
+
             builder.Services.AddHttpContextAccessor();
 
             //Repositories

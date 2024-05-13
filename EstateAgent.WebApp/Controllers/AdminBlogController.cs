@@ -40,6 +40,7 @@ namespace EstateAgent.WebApp.Controllers
             }
             _toastNotification = toastNotification;
             _blogService = blogService;
+            
         }
 
         public async Task<IActionResult> Index()

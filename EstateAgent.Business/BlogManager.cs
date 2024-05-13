@@ -29,7 +29,7 @@ namespace EstateAgent.Business
         public async Task<BussinessLayerResult<bool>> Add(BlogDto blog)
         {
             var response = new BussinessLayerResult<bool>();
-
+            
             try
             {
                 var mediaResult = await _mediaService.Add(new MediaDto { File = blog.File });
@@ -65,7 +65,6 @@ namespace EstateAgent.Business
                     {
                         response.AddError(Dto.Enums.ErrorMessageCode.BlogBlogAddValidationError, err.ErrorMessage);
                     }
-
 
                 }
 
